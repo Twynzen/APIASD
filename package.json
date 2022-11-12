@@ -1,0 +1,25 @@
+{
+    "name": "asdmutants",
+    "version": "0.0.1",
+    "description": "Basic API to controle mutants categories",
+    "main": "index.js",
+    "scripts": {
+        "test": "trun"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Twynzen/APIASD.git"
+    },
+    "keywords": [
+        "1234"
+    ],
+    "author": "Daniel Castiblsanco",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Twynzen/APIASD/issues"
+    },
+    "homepage": "https://github.com/Twynzen/APIASD#readme",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
