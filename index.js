@@ -1,17 +1,16 @@
 const express = require('express');
 const routerApi = require('./routes');
-
+const cors = require('cors');
+const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errorHandler');
 const app = express();
-
+app.use(cors());
 app.use(express.json());
-
-const mutants = [,
-    { id: 2, name: 'Batman', age: 40, Vehicle: 'Advanced military car', isAlive: true, insidePrision: false },
-    { id: 3, name: 'Punisher', age: 42, Vehicle: 'Van', isAlive: true, insidePrision: false },
-];
 
 
 const port = process.env.port || 8080;
 app.listen(port, () => console.log(`Listen port ${port}...`));
 
 routerApi(app);
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);

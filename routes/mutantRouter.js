@@ -1,29 +1,34 @@
 const express = require('express');
 const MutantService = require('../services/mutantService');
-
+const { createMutantSchema, updateMutantSchema, getMutantSchema } = require('../schemas/mutantSchema');
+const validatorHandler = require('../middlewares/validatorHandler');
 const router = express.Router();
 
 const service = new MutantService();
 
 
 router.get('/', async(req, res) => {
-    const mutants = await service.find();
-    res.json(mutants);
-});
-
-
-
-
-router.get('/:id', async(req, res) => {
     try {
-        const { id } = req.params;
-        const mutant = await service.findOne(id);
-        res.json(mutant);
+        const mutants = await service.find();
+        res.json(mutants);
     } catch (error) {
-        console.error(error);
+        throw new Error('Boom');
     }
 
 });
+
+router.get('/:id',
+    validatorHandler(getMutantSchema, 'params'),
+    async(req, res, next) => {
+        try {
+            const { id } = req.params;
+            const mutant = await service.findOne(id);
+            res.json(mutant);
+        } catch (error) {
+            next(error);
+        }
+
+    });
 
 router.patch('/:id', async(req, res) => {
     try {

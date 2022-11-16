@@ -5,8 +5,8 @@ const faker = require('faker');
 class MutantService {
     constructor() {
         this.mutants = [
-            { id: faker.datatype.uuid(), name: 'Batman', age: 40, Vehicle: 'Advanced military car', isAlive: true, insidePrision: false },
-            { id: faker.datatype.uuid(), name: 'Punisher', age: 42, Vehicle: 'Van', isAlive: true, insidePrision: false },
+            { id: faker.datatype.uuid(), name: 'Batman', age: 40, vehicle: 'Advanced military car', isAlive: true, insidePrision: false, placeOperation: 'Gothic City' },
+            { id: faker.datatype.uuid(), name: 'Punisher', age: 42, vehicle: 'Van', isAlive: true, insidePrision: false, placeOperation: 'Rusia' },
         ];
     }
     async create(data) {
@@ -27,8 +27,6 @@ class MutantService {
         return this.mutants;
     }
     async findOne(id) {
-        // const name = this.getTotal();
-        // return this.products.find(item => item.id === id);
         const mutant = this.mutants.find((item => item.id === id));
 
         if (!mutant) {
