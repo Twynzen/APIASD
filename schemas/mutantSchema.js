@@ -2,10 +2,10 @@ const Joi = require('joi');
 const id = Joi.string().uuid();
 const name = Joi.string().min(3).max(15);
 const age = Joi.number().integer().min(5);
-const vehicle = Joi.string().min(3).max(15);
+const vehicle = Joi.string().min(3).max(25);
 const isAlive = Joi.boolean();
 const insidePrision = Joi.boolean();
-const placeOperation = Joi.string().min(3).max(25);
+const placeOperation = Joi.string().min(3).max(35);
 
 const createMutantSchema = Joi.object({
     name: name.required(),

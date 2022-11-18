@@ -2,6 +2,7 @@ const express = require('express');
 const MutantService = require('../services/mutantService');
 const { createMutantSchema, updateMutantSchema, getMutantSchema } = require('../schemas/mutantSchema');
 const validatorHandler = require('../middlewares/validatorHandler');
+const { Boom } = require('@hapi/boom');
 const router = express.Router();
 
 const service = new MutantService();
@@ -11,8 +12,12 @@ router.get('/', async(req, res) => {
     try {
         const mutants = await service.find();
         res.json(mutants);
+        res.sendStatus(200).json({
+            message: 'wi',
+
+        });
     } catch (error) {
-        throw new Error('Boom');
+        console.error(error);
     }
 
 });
@@ -41,11 +46,18 @@ router.patch('/:id', async(req, res) => {
     }
 });
 
-router.post('/', async(req, res) => {
-    const body = req.body;
-    const newMutant = await service.create(body);
-    res.status(201).json(newMutant);
-});
+router.post('/',
+    validatorHandler(createMutantSchema, 'body'),
+    async(req, res) => {
+        try {
+            const body = req.body;
+            const newMutant = await service.create(body);
+            res.status(201).json(newMutant);
+        } catch (error) {
+            res.json(Boom.badRequest('Invalid Request'));
+        }
+
+    });
 
 router.delete('/:id', async(req, res) => {
     const { id } = req.params;

@@ -1,7 +1,7 @@
 //middlegare de tipo error
 
 function logErrors(err, req, res, next) {
-    console.log('LogErrors');
+    console.log(err, 'LogErrors');
     console.error(err);
     next(err);
 }
@@ -17,6 +17,7 @@ function errorHandler(err, req, res, next) {
 function boomErrorHandler(err, req, res, next) {
     if (err.isBoom) {
         const { output } = err;
+        console.log('BOOMErrors', output.statusCode);
         res.status(output.statusCode).json(output.payload);
     }
     next(err);
