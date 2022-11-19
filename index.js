@@ -3,6 +3,10 @@ const routerApi = require('./routes');
 const cors = require('cors');
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errorHandler');
 const app = express();
+
+
+
+
 app.use(cors());
 app.use(express.json());
 
